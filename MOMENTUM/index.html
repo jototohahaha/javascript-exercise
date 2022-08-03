@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Momentum</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="weather">
+    <span></span>
+    <br>
+    <span></span>
+  </div>
+
+  <section class="blur">
+    <div id="content">
+      <div id="content_left">
+        <h2 id="clock" >00:00:00</h2>
+        <form class="hidden"id="login-form">
+          <input class="inputclass"required maxlength="15" type="text" placeholder="YOUR ID">
+          <input class="button" type="submit" value="로그인">
+        </form>
+        <h1 id="greeting" class="hidden"></h1>
+      </div>
+      <div id="content_right">
+        <form id="todo-form" class="hidden">
+          <input class = "inputclass" required type="text" placeholder="리스트를 작성 후 엔터를 누르세요.">
+        </form>
+        <ul id="todo-list" class="hidden"></ul>
+      </div>
+    </div>
+    
+    
+    <div id="quote" class="hidden">
+      <span></span>
+      <span></span>
+    </div>
+  </section>
+
+
+
+    
+
+
+
+  <script src="greetings.js"></script>
+  <script src="clock.js"></script>
+  <script src="quotes.js"></script>
+  <script src="background.js"></script>
+  <script src="todolist.js"></script>
+  <script src="weather.js"></script>
+</body>
+</html>

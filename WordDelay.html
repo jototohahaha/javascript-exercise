@@ -1,0 +1,68 @@
+
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>끝말잇기</title>
+</head>
+<body>  
+  
+  <div><span id="order">1</span>번째 참가자</div>
+  <div>제시어: <span id="word"></span></div>
+  <input type="text">
+  <button>입력</button>
+  <script>
+    // 값을 입력 받음 prompt
+    const number = Number(prompt('몇명이 참가하나요?'));
+    //  사용자에게 경고 메세지number
+    // alert(number);
+    const $button = document.querySelector('button');
+    const $input = document.querySelector('input');
+    // 사용자의 확인을 요구 confirm 
+    // const yesOrNo = confirm('맞나요?');
+    const $word = document.querySelector('#word');
+    const $order = document.querySelector('#order');
+    // // html요소 선텍 
+    // document.querySelctor('input');
+    // const $button = document.querySelector('button');
+    // // 요소 여러개 선택
+    // const $$buttons = document.querySelectorAll('button');
+    
+    let word; //제시어
+    let newWord; // 새로 입력한 단어
+
+    const onClickButton = () => {
+      if(!word || word[word.length - 1]=== newWord[0]){ //제시어가 비어있는경우
+        word = newWord;
+        $word.textContent = word;
+        
+        const order = Number($order.textContent); //현재 순서
+
+        if(order + 1 > number){
+          $order.textContent = 1;
+          }else{
+            $order.textContent = order +1;
+        }
+          $input.value='';
+          $input.focus();
+        }else{
+          alert('올바르지 않은 단어입니다.');
+          $input.value='';
+          $input.focus();
+        }
+      };
+    
+    const onInput = (event) =>{
+      newWord = event.target.value;
+    };
+
+
+
+    $button.addEventListener('click', onClickButton);
+    $input.addEventListener('input', onInput);
+
+    
+  </script>
+</body>
+</html>
