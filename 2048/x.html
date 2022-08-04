@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2048Game!</title>
+  <style>
+    body{
+  text-align: center;
+}
+#table{
+  border-collapse: collapse;
+  user-select: none;
+  margin: 2rem auto;
+  border-radius: 10px;
+  border-style: hidden;
+  box-shadow: 0 0 0 10px #bbada0;
+}
+#table td{
+  border: 10px solid #bbada0;
+  width: 116px;
+  height: 128px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+}
+#score{
+  user-select: none;
+  background-color: #bbada0;
+  color: whitesmoke;
+  font-weight: bold;
+  height: 3rem;
+  width: 10rem;
+  border-radius: 5px;
+  margin: 2rem auto;
+  line-height: 3rem;
+}
+.color-2{background-color:rgb(251, 243, 233); color: rgb(65, 65, 65);}
+.color-4{background-color:rgb(252, 210, 159); color: rgb(65, 65, 65);}
+.color-8{background-color:rgb(253, 182, 94); color: rgb(65, 65, 65);}
+.color-16{background-color:rgb(249, 149, 27); color: rgb(65, 65, 65);}
+.color-32{background-color:rgb(253, 122, 51); color: rgb(65, 65, 65);}
+.color-64{background-color:rgb(246, 97, 77); color: rgb(65, 65, 65);}
+.color-128{background-color:rgb(255, 150, 150); color: rgb(65, 65, 65);}
+.color-256{background-color:rgb(249, 175, 175); color: rgb(65, 65, 65);}
+.color-512{background-color:rgb(255, 177, 190); color: whitesmoke;}
+.color-1024{background-color:rgb(252, 92, 145); color: whitesmoke;}
+.color-2048{background-color:rgb(170, 59, 255); color: whitesmoke;}
+  </style>
+
+</head>
+<body>  
+  <table id="table"></table>
+  <div id="score">0</div>
+  <script>
+
+    const table = document.querySelector('#table');
+    const score = document.querySelector('#score');
+
+    let data = [];
+
+    function start(){
+      for(let i = 0; i < 4; i++){
+        const rowData = [];
+        const $tr = document.createElement('tr');
+        for(let j = 0; j < 4; j++){
+          rowData.push(0);
+          const $td = document.createElement('td');
+          $tr.appendChild($td);
+        }
+        data.push(rowData);
+        table.appendChild($tr);
+      }
+      random();
+      show();
+    }
+
+    function random(){
+      const empty = [];
+      data.forEach(function(rowData, i){ // 몇번째 줄
+        rowData.forEach(function(cellData, j){// 몇번째 칸
+          if(cellData === 0){
+            empty.push([i,j]);
+          }
+        });
+      });
+      const random = empty[Math.floor(Math.random() * empty.length)];
+      for(let k = 0; k < 4; k++){
+        for(let h = 0; h < 4; h++){
+          if(data[k][h] >= 200){
+            const num = [2, 4];
+            const randomNum = num[Math.floor(Math.random() * num.length)];
+          }else{
+            randomNum = 2;
+          }
+        }
+      }
+      data[random[0]][random[1]] = randomNum;
+    }
+
+    function show(){
+      for(let i = 0; i < 4; i++){
+        for(let j = 0; j < 4; j++){
+          const target = table.children[i].children[j];
+          const cell = data[i][j];
+          if(cell > 0){
+            target.textContent = cell;
+            target.className = 'color-' + cell;
+          }else{
+            target.textContent ='';
+            target.className = '';
+          }
+        }
+      }
+    }
+
+    start();
+
+
+
+    data = [
+      [0, 0, 2, 0],
+      [64, 4, 8, 4],
+      [2, 0, 2, 0], 
+      [2, 0, 4, 4], 
+    ];
+    show();
+
+    function move(direction){
+      switch(direction){
+        case 'left':{
+          left();
+          break;
+        }
+        case 'right': {
+          right();
+          break;
+        }
+        case 'up': {
+          right();
+          break;
+        }
+        case 'down': {
+          right();
+          break;
+        }
+      }
+    }
+
+    function left(){
+      const newData = []; //data 임시 대체 배열
+      let newRowData = []; // 한줄씩 배열 
+      for(let i = 0; i < 4; i++){
+        for(let j = 0; j < 4; j++){
+          if(data[i][j]){
+            newRowData.push(data[i][j]); //0이 아닌 값만 저장
+          }
+        }
+        console.log('newRowData 11>>', newRowData);
+        for(let k = 0; k < 3; k++){ //같은 값이 나란히 있으면 더하기
+          const preData = [];
+          const nextData = [];
+          console.log(`164번줄 >> ${newRowData[k+1]}>>>`, newRowData[k+1])
+          if(newRowData[k+1]){
+            preData = newRowData[k];
+            nextData = newRowData[k+1];
+            console.log('pre / next>>', preData, nextData);
+            if(preData === nextData){
+              console.log('더한다!');
+              preData = preData * -2;
+              newRowData[k] = Math.abs(preData);
+            }
+          }
+        }
+
+        console.log('newRowData 22>>', newRowData);
+        while(newRowData.length === 4){
+          console.log('while>>');
+          newRowData.push(0);
+        }
+        newData.push(newRowData);
+      }
+      data = newData;
+      console.log('data>>', data);
+
+      if(data.flat().includes(2048)){
+        /// 승리
+        draw();
+        setTimeout(() => {
+          alert('축하합니다. 2048을 만들었습니다.');
+        }, 0);
+      }else if(!data.flat().includes(0)){
+        // 빈칸이 없으면 패배
+        alert(`패배하였습니다.  ${$score.textContent}`);
+      }else{
+        put2ToRandomCell();
+        draw();
+      }
+    }
+
+        //키보드 움직임 
+    window.addEventListener('keyup',(event) =>{
+      if(event.key === 'ArrowUp'){
+        console.log('up');
+        move('up');
+      }else if( event.key === 'ArrowDown'){
+        console.log('down');
+        move('down');
+      }else if( event.key === 'ArrowLeft'){
+        console.log('left');
+        move('left');
+      }else if(event.key === 'ArrowRight'){
+        console.log('right');
+        move('right');
+      }
+    });
+
+  </script>
+</body>
+</html>

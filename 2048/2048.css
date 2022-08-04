@@ -13,7 +13,7 @@ body{
   border: 10px solid #bbada0;
   width: 116px;
   height: 128px;
-  font-size:50px;
+  font-size: 50px;
   font-weight: bold;
   text-align: center;
 }
@@ -28,14 +28,14 @@ body{
   margin: 2rem auto;
   line-height: 3rem;
 }
-.color-2{background-color:rgb(235, 224, 211); color: rgb(65, 65, 65);}
-.color-4{background-color:rgb(186, 165, 140); color: rgb(65, 65, 65);}
-.color-8{background-color:rgb(250, 186, 108); color: rgb(65, 65, 65);}
-.color-16{background-color:rgb(237, 158, 61); color: rgb(65, 65, 65);}
-.color-32{background-color:rgb(235, 121, 59); color: rgb(65, 65, 65);}
+.color-2{background-color:rgb(251, 243, 233); color: rgb(65, 65, 65);}
+.color-4{background-color:rgb(252, 210, 159); color: rgb(65, 65, 65);}
+.color-8{background-color:rgb(253, 182, 94); color: rgb(65, 65, 65);}
+.color-16{background-color:rgb(249, 149, 27); color: rgb(65, 65, 65);}
+.color-32{background-color:rgb(253, 122, 51); color: rgb(65, 65, 65);}
 .color-64{background-color:rgb(246, 97, 77); color: rgb(65, 65, 65);}
-.color-128{background-color:rgb(239, 133, 249); color: rgb(65, 65, 65);}
-.color-256{background-color:rgb(177, 137, 237); color: rgb(65, 65, 65);}
-.color-512{background-color:rgb(151, 80, 199); color: whitesmoke;}
-.color-1024{background-color:rgb(124, 60, 184); color: whitesmoke;}
-.color-2048{background-color:rgb(56, 68, 175); color: whitesmoke;}
+.color-128{background-color:rgb(255, 150, 150); color: rgb(65, 65, 65);}
+.color-256{background-color:rgb(249, 175, 175); color: rgb(65, 65, 65);}
+.color-512{background-color:rgb(255, 177, 190); color: whitesmoke;}
+.color-1024{background-color:rgb(252, 92, 145); color: whitesmoke;}
+.color-2048{background-color:rgb(170, 59, 255); color: whitesmoke;}
